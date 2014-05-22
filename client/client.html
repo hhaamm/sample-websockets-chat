@@ -1,16 +1,55 @@
 <html>
   <head>
     <title>Websockets tutorial</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
     <script src="socket.io-client/socket.io.js"></script>
     <script>
-     var socket = io.connect('http://localhost:8000');
-     socket.on('news', function (data) {
-       console.log(data);
-       socket.emit('my other event', { my: 'data' });
+     $(document).ready(function() {
+       var socket = io.connect('http://localhost:8000');
+       socket.on("receive-message", function(data) {
+         console.log("Receiving message: "+data.message);
+         console.log(data);
+         $("#chat-area").append("<p>"+data.user+" said : "+data.message+"</p>");
+       });
+       $("#send").click(function() {
+         console.log("Sending");
+         socket.emit("message", {user: $("#user").val(), message: $("#message").val()});
+         $("#message").val("");
+       });
      });
     </script>
+    <style>
+     #chat-area {
+       height: 300px;
+       color: white;
+       background: black;
+       margin-top: 1em;
+     }
+     #message {
+       width: 95%;
+     }
+     #send {
+       width: 4%;
+       float: right;
+     }
+     #controls {
+       margin-top: 1em;
+     }
+    </style>
   </head>
   <body>
-    <h1>Web Sockets Tutorial</h1>
+    <h1>Web Sockets Chat Tutorial</h1>
+
+    <label>Your name</label>
+    <input type="text" id="user" value="Anonnymous">
+
+    <div id="chat-area">
+
+    </div>
+
+    <div id="controls">
+      <input type="text" id="message">
+      <input id="send" type="button" value="Send"/>
+    </div>
   </body>
 </html>
