@@ -6,3 +6,7 @@ sample-websockets-chat
     cd server
     npm install socket.io
 
+## Running
+
+    cd server
+    node server.js
