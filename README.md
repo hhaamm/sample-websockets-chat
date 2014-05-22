@@ -1,5 +1,5 @@
-tuto-websockets
-===============
+sample-websockets
+=================
 
 ## Installation
 
