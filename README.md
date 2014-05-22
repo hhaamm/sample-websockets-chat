@@ -1,5 +1,5 @@
-sample-websockets
-=================
+sample-websockets-chat
+======================
 
 ## Installation
 
